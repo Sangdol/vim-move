@@ -99,7 +99,9 @@ function s:MoveVertically(first, last, distance)
     " line and the cursor will be placed at the last line.
     execute l:first ',' l:last 'move' l:after
 
-    if g:move_auto_indent
+    " If there's a buffer variable 'move_auto_indent' set, it overrides the
+    " global 'move_auto_indent' setting.
+    if exists('b:move_auto_indent') ? b:move_auto_indent : g:move_auto_indent
         " To preserve the relative indentation between lines we only use '=='
         " on the first line, to figure out by how much we need to reindent.
         " This heuristic assumes that the indentation level of the first line
